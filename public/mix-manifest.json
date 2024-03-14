@@ -1,0 +1,21 @@
+{
+    "/assets/js/main.js": "/assets/js/main.js",
+    "/assets/vendors/bootstrap/bootstrap.css": "/assets/vendors/bootstrap/bootstrap.css",
+    "/assets/css/pages/error.css": "/assets/css/pages/error.css",
+    "/assets/css/pages/auth.css": "/assets/css/pages/auth.css",
+    "/assets/css/app.css": "/assets/css/app.css",
+    "/assets/vendors/bootstrap/bootstrap.bundle.min.js": "/assets/vendors/bootstrap/bootstrap.bundle.min.js",
+    "/assets/vendors/apexcharts/apexcharts.css": "/assets/vendors/apexcharts/apexcharts.css",
+    "/assets/vendors/apexcharts/apexcharts.min.js": "/assets/vendors/apexcharts/apexcharts.min.js",
+    "/assets/vendors/perfect-scrollbar/perfect-scrollbar.css": "/assets/vendors/perfect-scrollbar/perfect-scrollbar.css",
+    "/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js": "/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js",
+    "/assets/vendors/toastify/toastify.css": "/assets/vendors/toastify/toastify.css",
+    "/assets/vendors/toastify/toastify.js": "/assets/vendors/toastify/toastify.js",
+    "/assets/vendors/simple-datatables/style.css": "/assets/vendors/simple-datatables/style.css",
+    "/assets/vendors/simple-datatables/simple-datatables.js": "/assets/vendors/simple-datatables/simple-datatables.js",
+    "/assets/vendors/feather-icons/feather.min.js": "/assets/vendors/feather-icons/feather.min.js",
+    "/assets/vendors/choicesjs/choices.js": "/assets/vendors/choicesjs/choices.js",
+    "/assets/vendors/choicesjs/choices.css": "/assets/vendors/choicesjs/choices.css",
+    "/assets/img/building.jpg": "/assets/img/building.jpg",
+    "/assets/img/road.jpg": "/assets/img/road.jpg"
+}
