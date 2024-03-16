@@ -37,7 +37,7 @@ class DefaultSettingSeeder extends Seeder
 				'name' => 'siteName',
 				'datatype' => 'string',
 				'summary' => 'Your Site name',
-				'content' => env('app.name', 'CabZoy'),
+				'content' => env('app.name', 'New Capital Cab'),
 				'protected' => 1
 			],
 			[

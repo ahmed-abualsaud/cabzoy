@@ -19,7 +19,7 @@ if (!function_exists('opt_selected')) {
 }
 
 if (!function_exists('select_box')) {
-	function select_box($name = null, $title = null, $options = [], $validation = null, $selected = null, $readonly = false, $multiple = false)
+	function select_box($name = null, $title = null, $options = [], $validation = null, $selected = null, $readonly = false, $multiple = false, $placeHolder = '')
 	{
 		$error     = is($validation, 'object') ? $validation->getError($name) : '';
 		$className = is($validation, 'object') && $validation->hasError($name) ? 'is-invalid' : '';
@@ -30,7 +30,8 @@ if (!function_exists('select_box')) {
 		$readonly = $readonly ? 'readonly' : '';
 		$multiple = $multiple ? 'multiple' : '';
 
-		return "<div class='form-group'><label class='mb-2' for='{$name}'>{$title}</label><div class='form-control p-0 {$className}'><select class='form-control choices' name='{$name}' id='{$name}' {$readonly} {$multiple}><option value='' {$selectDisabled} disabled>Select {$title}</option>{$option}</select></div><div class='invalid-feedback'>{$error}</div></div>";
+		$placeHolder = empty($placeHolder) ? "Select ".$title : $placeHolder;
+		return "<div class='form-group'><label class='mb-2' for='{$name}'>{$title}</label><div class='form-control p-0 {$className}'><select class='form-control choices' name='{$name}' id='{$name}' {$readonly} {$multiple}><option value='' {$selectDisabled} disabled>{$placeHolder}</option>{$option}</select></div><div class='invalid-feedback'>{$error}</div></div>";
 	}
 }
 

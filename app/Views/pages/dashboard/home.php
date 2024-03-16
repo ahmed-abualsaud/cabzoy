@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <div class="page-heading">
-	<h3><?php print(config('Settings')->siteName ?? 'Dashboard') ?>'s Statistics</h3>
+<h3><?= lang("Lang.statistics", [(config('Settings')->siteName ?? lang("Lang.dashboard"))]) ?></h3>
 </div>
 <div class="page-content">
 	<section class="row">
@@ -18,7 +18,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Orders</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalOrders") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countOrders ?? 0; ?></h6>
 								</div>
 							</div>
@@ -35,7 +35,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Users</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalUsers") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countUsers ?? 0; ?></h6>
 								</div>
 							</div>
@@ -52,7 +52,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Drivers</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalDrivers") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countDrivers ?? 0 ?></h6>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Online Payment</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.onlinePayment") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countOnlineOrders ?? 0; ?></h6>
 								</div>
 							</div>
@@ -86,7 +86,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Cancelled Orders</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.cancelledOrders") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countCancelOrders ?? 0; ?></h6>
 								</div>
 							</div>
@@ -103,7 +103,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Scheduled Orders</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.scheduledOrders") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countAdvancedOrders ?? 0; ?></h6>
 								</div>
 							</div>
@@ -120,7 +120,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">COD Payment</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.codPaymnet") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= $countCodOrders ?? 0; ?></h6>
 								</div>
 							</div>
@@ -137,7 +137,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Earnings</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalEarnings") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= formatCurrency($totalCompanyWalletBalance ?? 0); ?></h6>
 								</div>
 							</div>
@@ -155,7 +155,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Transactions</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalTransactions") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= formatCurrency($totalTransactionBalance ?? 0); ?></h6>
 
 								</div>
@@ -173,7 +173,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Wallet</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalWallet") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= formatCurrency($totalWalletBalance ?? 0); ?></h6>
 								</div>
 							</div>
@@ -190,7 +190,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Debit</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalDebit") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= formatCurrency($totalWalletDebit ?? 0); ?></h6>
 								</div>
 							</div>
@@ -207,7 +207,7 @@
 									</div>
 								</div>
 								<div class="flex-grow-1 ms-3">
-									<h6 class="text-muted font-semibold">Total Credit</h6>
+									<h6 class="text-muted font-semibold"><?= lang("Lang.totalCredit") ?></h6>
 									<h6 class="font-extrabold mb-0"><?= formatCurrency($totalWalletCredit ?? 0); ?></h6>
 								</div>
 							</div>
@@ -219,7 +219,7 @@
 				<div class="col-12">
 					<div class="card overflow-auto">
 						<div class="card-header">
-							<h4>Today's Rides</h4>
+							<h4><?= lang("Lang.todaysRides") ?></h4>
 						</div>
 						<div class="card-body">
 							<div id="daily-order-history"></div>
@@ -229,20 +229,19 @@
 			</div>
 			<div class="card overflow-auto">
 				<div class="card-body">
-					<h4 class="card-title">History</h4>
-					<p class="card-text">Booking history of all</p>
+					<h4 class="card-title"><?= lang("Lang.history") ?></h4>
+					<p class="card-text"><?= lang("Lang.bookingHistoryOfAll") ?></p>
 
 					<div class="table-responsive">
 						<table class="table" id="table1">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>User</th>
-									<th>Details</th>
-									<th>Location</th>
-									<th>Driver</th>
-									<th>Status</th>
-									<th data-type="date" data-format="MMM DD, YYYY">Booking At</th>
+									<th><?= lang("Lang.user") ?></th>
+									<th><?= lang("Lang.details") ?></th>
+									<th><?= lang("Lang.location") ?></th>
+									<th><?= lang("Lang.driver") ?></th>
+									<th data-type="date" data-format="MMM DD, YYYY"><?= lang("Lang.bookingAt") ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -338,7 +337,7 @@
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<h4>Order Type</h4>
+					<h4><?= lang("Lang.orderType") ?></h4>
 				</div>
 				<div class="card-body">
 					<div id="order-type"></div>
@@ -346,7 +345,7 @@
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<h4>Payment Type</h4>
+					<h4><?= lang("Lang.paymentType") ?></h4>
 				</div>
 				<div class="card-body">
 					<div id="payment-type"></div>
@@ -382,6 +381,7 @@
 	let optionsPaymentType = {
 		series: [<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? "$countOnlineOrders, $countCorporateOrders, $countCodOrders" : "$countOnlineOrders, $countCodOrders" ?>],
 		labels: [<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? "'Online Payment', 'Corporate Payment', 'COD Payment'" : "'Online Payment','COD Payment'" ?>],
+		// labels: [<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? lang("Lang.onlinePayment").", ".lang("Lang.corporatePayment").", ".lang("Lang.codPayment") : lang("Lang.onlinePayment").", ".lang("Lang.codPayment") ?>],
 		colors: [<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? "'#fc0a04', '#ffd451', '#55c6e8'" : "'#fc0a04', '#55c6e8'" ?>],
 		chart: {
 			type: 'donut',
@@ -403,6 +403,7 @@
 	let optionsOrderType = {
 		series: [<?= $countCancelOrders; ?>, <?= $countCompleteOrders; ?>, <?= $countOngoingOrders; ?>],
 		labels: ['Cancel', 'Complete', 'On Going'],
+		// labels: [<?= lang("Lang.cancel") ?>, <?= lang("Lang.complete") ?>, <?= lang("Lang.onGoing") ?>],
 		colors: ['#fc0a04', '#5ddab4', '#55c6e8'],
 		chart: {
 			type: 'pie',

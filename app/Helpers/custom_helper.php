@@ -80,3 +80,10 @@ if (!function_exists('formatCurrency')) {
 		return number_to_currency($amount, getDefaultConfig('defaultCurrencyUnit', 'USD'));
 	}
 }
+
+if (!function_exists('camelCase')) {
+	function camelCase($string)
+	{
+		return lcfirst(str_replace('-', '', ucwords(strtolower($string), '-')));
+	}
+}

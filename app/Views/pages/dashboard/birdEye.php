@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <div class="page-heading">
-	<h3><?php print(config('Settings')->siteName ?? 'Dashboard') ?>'s Bird Eye View</h3>
+	<h3><?= lang("Lang.appBirdEyeView", [(config('Settings')->siteName ?? lang("Lang.dashboard"))]) ?></h3>
 </div>
 <div class="page-content" style="background-color: var(--bs-body-bg);" id="fullscreen-div">
 	<section class="row">
@@ -12,7 +12,7 @@
 					<div class="card overflow-auto">
 						<div class="card-body">
 							<div id="myGoogleMap" class="shadow" style="height:60vh; border-radius: 24px">
-								<noscript>Map are not loaded</noscript>
+								<noscript><?= lang("Lang.mapAreNotLoaded") ?></noscript>
 							</div>
 						</div>
 					</div>
@@ -20,7 +20,7 @@
 				<div class="col-12 col-lg-3">
 					<div class="card overflow-auto">
 						<div class="card-header">
-							<h2>All Online Drivers</h2>
+							<h2><?= lang("Lang.allOnlineDrivers") ?></h2>
 						</div>
 						<div id="driverList"></div>
 					</div>

@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <div class="page-heading">
-	<h3><?php print(config('Settings')->siteName ?? 'Dashboard') ?>'s Dispatch Panel</h3>
+<h3><?= lang("Lang.appDispatchPanel", [(config('Settings')->siteName ?? lang("Lang.dashboard"))]) ?></h3>
 </div>
 <div class="page-content" style="background-color: var(--bs-body-bg);" id="fullscreen-div">
 	<button type="button" id="toggle-fullscreen" class="btn bg-white position-fixed top-0 end-0" data-bs-toggle="tooltip" data-bs-placement="left" title="Full Screen Mode">
@@ -14,15 +14,15 @@
 				<div class="col-12 col-xl-7">
 					<div class="card">
 						<div class="card-header">
-							<h4>Order A Ride</h4>
+							<h4><?= lang("Lang.orderARide") ?></h4>
 						</div>
 						<div class="card-body">
 							<form action="<?= route_to('dispatch') ?>" method="post">
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group mb-3">
-											<label for="pickupText">Pickup Location</label>
-											<input type="text" id="pickupText" name="pickup_text" class="form-control form-control-lg <?php $validation->hasError('pickup_text') && print 'is-invalid'; ?>" placeholder="Search Pickup Location" value="<?= old('pickup_text') ?>">
+											<label for="pickupText"><?= lang("Lang.pickupLocation") ?></label>
+											<input type="text" id="pickupText" name="pickup_text" class="form-control form-control-lg <?php $validation->hasError('pickup_text') && print 'is-invalid'; ?>" placeholder=<?= lang("Lang.searchPickupLocation") ?> value="<?= old('pickup_text') ?>">
 											<div class="invalid-feedback"><?= $validation->getError('pickup_text') ?></div>
 
 											<input type="hidden" name="pickup_lat" id="pickupTextLat" value="<?= old('pickup_lat') ?>">
@@ -30,40 +30,40 @@
 											<input type="hidden" name="order_kms" id="totalDistance" value="<?= old('order_kms') ?>">
 											<input type="hidden" name="pickup_kms" id="pickupDistance" value="<?= old('pickup_kms') ?>">
 											<input type="hidden" name="drop_kms" id="dropDistance" value="<?= old('drop_kms') ?>">
-											<small id="fullscreenWarning" class="d-block mt-1 d-none">Place suggestion may not visible on fullscreen, <br> Please select place first then go to fullscreen mode.</small>
+											<small id="fullscreenWarning" class="d-block mt-1 d-none"><?= lang("Lang.placeSuggestionMayNotVisibleOnFullscreen") ?> <br> <?= lang("Lang.pleaseSelectPlaceFirstThenGoToFullscreenMode") ?></small>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group mb-3">
-											<label for="dropText">Drop Location</label>
-											<input type="text" id="dropText" name="drop_text" class="form-control form-control-lg <?php $validation->hasError('drop_text') && print 'is-invalid'; ?>" placeholder="Search Drop Location" value="<?= old('drop_text') ?>">
+											<label for="dropText"><?= lang("Lang.dropLocation") ?></label>
+											<input type="text" id="dropText" name="drop_text" class="form-control form-control-lg <?php $validation->hasError('drop_text') && print 'is-invalid'; ?>" placeholder=<?= lang("Lang.searchDropLocation") ?> value="<?= old('drop_text') ?>">
 											<div class="invalid-feedback"><?= $validation->getError('drop_text') ?></div>
 
 											<input type="hidden" name="drop_lat" id="dropTextLat" value="<?= old('drop_lat') ?>">
 											<input type="hidden" name="drop_long" id="dropTextLong" value="<?= old('drop_long') ?>">
-											<small id="fullscreenWarning2" class="d-block mt-1 d-none">Place suggestion may not visible on fullscreen, <br> Please select place first then go to fullscreen mode.</small>
+											<small id="fullscreenWarning2" class="d-block mt-1 d-none"><?= lang("Lang.placeSuggestionMayNotVisibleOnFullscreen") ?> <br> <?= lang("Lang.pleaseSelectPlaceFirstThenGoToFullscreenMode") ?></small>
 										</div>
 									</div>
 									<div class="col-12">
 										<div class="form-group">
-											<label for="order_comment">Comment</label>
-											<textarea name="order_comment" class="form-control <?php $validation->hasError('order_comment') && print 'is-invalid'; ?>" id="order_comment" placeholder="Comment for the driver or trip"></textarea>
+											<label for="order_comment"><?= lang("Lang.comment") ?></label>
+											<textarea name="order_comment" class="form-control <?php $validation->hasError('order_comment') && print 'is-invalid'; ?>" id="order_comment" placeholder=<?= lang("Lang.commentForTheDriverOrTrip") ?>></textarea>
 											<div class="invalid-feedback"><?= $validation->getError('order_comment') ?></div>
 										</div>
 									</div>
 									<div class="col-lg-3">
-										<?= select_box('order_type', 'Booking Type', ['normal' => 'Immediate Booking', 'advanced' => 'Advanced Booking'], $validation); ?>
+										<?= select_box('order_type', lang("Lang.bookingType"), ['normal' => lang("Lang.immediateBooking"), 'advanced' => lang("Lang.advancedBooking")], $validation, null, false, false, lang("Lang.selectBookingType")); ?>
 									</div>
 									<div class="col-lg-3">
 										<div class="form-group">
-											<label for="booking_at_date" class="mb-2">Date of Booking</label>
+											<label for="booking_at_date" class="mb-2"><?= lang("Lang.dateOfBooking") ?></label>
 											<input type="date" class="form-control form-control-lg <?php $validation->hasError('booking_at_date') && print 'is-invalid'; ?>" min="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d', strtotime('+6 day')); ?>" name="booking_at_date" id="booking_at_date" value="<?= old('booking_at_date') ?>">
 											<div class="invalid-feedback"><?= $validation->getError('booking_at_date') ?></div>
 										</div>
 									</div>
 									<div class="col-lg-3">
 										<div class="form-group">
-											<label for="booking_at_time" class="mb-2">Time of Booking</label>
+											<label for="booking_at_time" class="mb-2"><?= lang("Lang.timeOfBooking") ?></label>
 											<input type="time" class="form-control form-control-lg <?php $validation->hasError('booking_at_time') && print 'is-invalid'; ?>" name="booking_at_time" id="booking_at_time" value="<?= old('booking_at_time') ?>">
 											<div class="invalid-feedback"><?= $validation->getError('booking_at_time') ?></div>
 										</div>
@@ -74,39 +74,39 @@
 											return $category[] = ucwords($data->category_name);
 										}, $categories);
 										$category[] = 'ANY'; ?>
-										<?= select_box('order_vehicle', 'Vehicle Type', array_combine($category, $category), $validation); ?>
+										<?= select_box('order_vehicle', lang("Lang.vehicleType"), array_combine($category, $category), $validation, null, false, false, lang("Lang.selectVehicleType")); ?>
 									</div>
 									<div class="col-lg-6">
 										<?php $user = [];
 										$user = array_map(static function ($data) use ($user) {
 											return $user[$data->id] = ucwords($data->firstname . ' ' . $data->lastname);
 										}, $users); ?>
-										<?= select_box('user_id', 'User', $user, $validation); ?>
-										<small>Not found user,<a href="<?= route_to('add_user'); ?>" class="btn-btn-primary btn-sm">Create new user here</a></small>
+										<?= select_box('user_id', lang("Lang.user"), $user, $validation, null, false, false, lang("Lang.selectUser")); ?>
+										<small><?= lang("Lang.notFoundUser") ?><a href="<?= route_to('add_user'); ?>" class="btn-btn-primary btn-sm"><?= lang("Lang.createNewUserHere") ?></a></small>
 									</div>
 									<div class="col-lg-6">
 										<?php $driver = [];
 										$driver = array_map(static function ($data) use ($driver) {
 											return $driver[$data->id] = ucwords($data->firstname . ' ' . $data->lastname);
 										}, $drivers); ?>
-										<?= select_box('driver_id', 'Driver', $driver, $validation); ?>
-										<small>Not found driver,<a href="<?= route_to('add_driver'); ?>" class="btn-btn-primary btn-sm">Assign driver here</a></small>
+										<?= select_box('driver_id', lang("Lang.driver"), $driver, $validation, null, false, false, lang("Lang.selectDriver")); ?>
+										<small><?= lang("Lang.notFoundUser") ?><a href="<?= route_to('add_driver'); ?>" class="btn-btn-primary btn-sm"><?=lang("Lang.assignDriverHere")?></a></small>
 									</div>
 									<div class="col-lg-6">
-										<?= select_box('is_paid', 'Payment Status', ['paid' => 'Paid', 'not-paid' => 'Not Paid'], $validation); ?>
+										<?= select_box('is_paid', lang("Lang.paymentMethod"), ['paid' => lang("Lang.paid"), 'not-paid' => lang("Lang.notPaid")], $validation, null, false, false, lang("Lang.selectPaymentMethod")); ?>
 									</div>
 									<div class="col-lg-6">
-										<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? select_box('payment_mode', 'Payment Mode', ['online' => 'Online', 'corporate' => 'Corporate Account', 'cod' => 'After Ride Cash'], $validation) : select_box('payment_mode', 'Payment Mode', ['online' => 'Online', 'cod' => 'After Ride Cash'], $validation); ?>
+										<?= config('Settings')->enableCorporateAccount &&  config('Settings')->enableCorporatePayment ? select_box('payment_mode', lang("Lang.paymentMode"), ['online' => 'Online', 'corporate' => 'Corporate Account', 'cod' => 'After Ride Cash'], $validation, null, false, false, lang("Lang.selectPaymentMode")) : select_box('payment_mode', lang("Lang.paymentMode"), ['online' => 'Online', 'cod' => 'After Ride Cash'], $validation, null, false, false, lang("Lang.selectPaymentMode")); ?>
 									</div>
 									<div class="col-lg-8 mt-3">
 										<div class="btn-group btn-block">
-											<button class="btn btn-primary btn-lg" type="submit" name="bookFromDispatch" value="dispatch">Book</button>
+											<button class="btn btn-primary btn-lg" type="submit" name="bookFromDispatch" value="dispatch"><?= lang("Lang.book") ?></button>
 
-											<button class="btn btn-primary btn-lg" id="calculateFare" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calculate Fares</button>
+											<button class="btn btn-primary btn-lg" id="calculateFare" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><?= lang("Lang.calculateFares") ?></button>
 										</div>
 									</div>
 									<div class="col-lg-4 mt-3">
-										<button class="btn btn-danger btn-lg btn-block" id="reset" type="reset">Reset</button>
+										<button class="btn btn-danger btn-lg btn-block" id="reset" type="reset"><?= lang("Lang.reset") ?></button>
 									</div>
 								</div>
 							</form>
@@ -116,24 +116,24 @@
 				<div class="col-12 col-xl-5">
 					<div class="card d-none mb-3" id="fareCard">
 						<div class="card-header">
-							<h4>Estimated</h4>
+							<h4><?= lang("Lang.estimated") ?></h4>
 						</div>
 						<div class="card-body">
 							<div class="row">
 								<div class="col-12">
-									<legend>Start Destination: </legend>
+									<legend><?= lang("Lang.startDestination") ?>: </legend>
 									<span id="start_destination"></span>
 								</div>
 								<div class="col-12 mt-3">
-									<legend>End Destination: </legend>
+									<legend><?= lang("Lang.endDestination") ?>: </legend>
 									<span id="end_destination"></span>
 								</div>
 								<div class="col-6 mt-3">
-									<legend>Total Distance: </legend>
+									<legend><?= lang("Lang.totalDistance") ?>: </legend>
 									<span id="total_distance"></span>
 								</div>
 								<div class="col-6 mt-3">
-									<legend>Total Duration: </legend>
+									<legend><?= lang("Lang.totalDuration") ?>: </legend>
 									<span id="total_duration"></span>
 								</div>
 							</div>
@@ -143,7 +143,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div id="myGoogleMap" class="shadow" style="height:60vh; border-radius: 24px">
-								<noscript>Map are not loaded</noscript>
+								<noscript><?= lang("Lang.mapAreNotLoaded") ?></noscript>
 							</div>
 						</div>
 					</div>
@@ -152,10 +152,10 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">New Orders</h4>
-							<p class="card-text">Only order status type <mark>new</mark> and <mark>booked</mark> are shown here.
+							<h4 class="card-title"><?= lang("Lang.newOrder") ?></h4>
+							<p class="card-text"><?= lang("Lang.onlyOrderStatusType") ?> <mark><?= lang("Lang.new") ?></mark><?= lang("Lang.and") ?><mark><?= lang("Lang.booked") ?></mark><?= lang("Lang.areShownHere") ?>.
 								<br>
-								Others will be show <a href="<?= route_to('orders'); ?>">here</a>
+								<?= lang("Lang.othersWillBeShow") ?> <a href="<?= route_to('orders'); ?>"><?= lang("Lang.here") ?></a>
 							</p>
 
 							<div class="table-responsive">
@@ -163,13 +163,13 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>User</th>
-											<th>Details</th>
-											<th>Location</th>
-											<th>Driver</th>
-											<th data-type="date" data-format="MMM DD, YYYY">Booking At</th>
+											<th><?= lang("Lang.user") ?></th>
+											<th><?= lang("Lang.details") ?></th>
+											<th><?= lang("Lang.location") ?></th>
+											<th><?= lang("Lang.driver") ?></th>
+											<th data-type="date" data-format="MMM DD, YYYY"><?= lang("Lang.bookingAt") ?></th>
 											<?php if (false && perm('orders', 'show, update, delete', true)) : ?>
-												<th data-sortable="false">Action</th>
+												<th data-sortable="false"><?= lang("Lang.action") ?></th>
 											<?php endif ?>
 										</tr>
 									</thead>
