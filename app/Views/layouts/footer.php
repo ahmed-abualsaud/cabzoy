@@ -6,7 +6,7 @@
 		<div class="float-end">
 			<p>
 				Crafted with <span class="text-danger"><i data-feather="heart"></i></span> by
-				<a href="https://fabithub.com/">Fab IT Hub Private Limited</a>
+				<a href="https://qruz.app/">Qruz</a>
 			</p>
 		</div>
 	</div>
