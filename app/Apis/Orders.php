@@ -348,6 +348,16 @@ class Orders extends BaseResourceController
 
 		$rules = ['order_status' => 'required|in_list[new,booked,dispatched,arrived,picked,ongoing,complete,cancel]'];
 
+		if (!empty($this->request->getVar('drop_text'))) $rules['drop_text']         = 'string';
+		if (!empty($this->request->getVar('pickup_text'))) $rules['pickup_text']     = 'string';
+		if (!empty($this->request->getVar('drop_lat'))) $rules['drop_lat']           = 'decimal';
+		if (!empty($this->request->getVar('drop_long'))) $rules['drop_long']         = 'decimal';
+		if (!empty($this->request->getVar('pickup_lat'))) $rules['pickup_lat']       = 'decimal';
+		if (!empty($this->request->getVar('pickup_long'))) $rules['pickup_long']     = 'decimal';
+		if (!empty($this->request->getVar('order_kms'))) $rules['order_kms']         = 'decimal';
+		if (!empty($this->request->getVar('drop_kms'))) $rules['drop_kms']           = 'decimal';
+		if (!empty($this->request->getVar('pickup_kms'))) $rules['pickup_kms']       = 'decimal';
+
 		if (!empty($this->request->getVar('is_paid'))) $rules['is_paid'] = 'in_list[paid, not-paid]';
 		if ($this->request->getVar('order_status') === 'cancel') $rules['category_id'] = 'required|is_natural_no_zero';
 		if (!$this->validate($rules)) return $this->failValidationErrors(
@@ -361,8 +371,17 @@ class Orders extends BaseResourceController
 		if (!is($defaultCompany, 'object')) return $this->fail('The Default company not set yet.');
 
 		$orderData = [];
-		if (!empty($this->request->getVar('order_status'))) $orderData['order_status'] = $this->request->getVar('order_status');
-		if (!empty($this->request->getVar('is_paid'))) $orderData['is_paid'] = $this->request->getVar('is_paid');
+
+		if (!empty($this->request->getVar('is_paid'))) $orderData['is_paid']            = $this->request->getVar('is_paid');
+		if (!empty($this->request->getVar('order_status'))) $orderData['order_status']  = $this->request->getVar('order_status');
+		if (!empty($this->request->getVar('drop_lat'))) $orderData['drop_lat']          = $this->request->getVar('drop_lat');
+		if (!empty($this->request->getVar('drop_long'))) $orderData['drop_long']        = $this->request->getVar('drop_long');
+		if (!empty($this->request->getVar('drop_text'))) $orderData['drop_text']        = $this->request->getVar('drop_text');
+		if (!empty($this->request->getVar('pickup_lat'))) $orderData['pickup_lat']      = $this->request->getVar('pickup_lat');
+		if (!empty($this->request->getVar('pickup_long'))) $orderData['pickup_long']    = $this->request->getVar('pickup_long');
+		if (!empty($this->request->getVar('pickup_text'))) $orderData['pickup_text']    = $this->request->getVar('pickup_text');
+		if (!empty($this->request->getVar('order_kms'))) $orderData['order_kms']        = $this->request->getVar('order_kms');
+
 
 		$driver = $this->orderDriverModel->where('order_id', $id)->where('action', 'accept')->first();
 
@@ -492,7 +511,10 @@ class Orders extends BaseResourceController
 
 			$isNotificationSeen = $this->notificationModel->markAsRead($orderUser->user_id, 'order');
 			if (!$isNotificationSeen) return $this->fail('Something went wrong while mark as read previous notification, please try sometime later.');
-		} else if ($this->request->getVar('order_status') === 'cancel') {
+		} 
+		
+		else if ($this->request->getVar('order_status') === 'cancel') 
+		{
 			$reason = $this->categoryModel->typeOf('cancellation')->find($this->request->getVar('category'));
 			if (!$reason) return $this->fail('Invalid Cancellation reason, Please select the valid reason for the cancellation.');
 
@@ -531,6 +553,80 @@ class Orders extends BaseResourceController
 
 			$isNotificationSeen = $this->notificationModel->markAsRead($orderUser->user_id, 'order');
 			if (!$isNotificationSeen) return $this->fail('Something went wrong while mark as read previous notification, please try sometime later.');
+		}
+
+
+		if (!empty(array_intersect_key($orderData, array_flip(['drop_lat', 'drop_long', 'drop_text', 'pickup_lat', 'pickup_long', 'pickup_text', 'order_kms', 'drop_kms', 'pickup_kms'])))) {
+
+			$promoCodeId = null;
+			$orderData['booking_at'] = $this->request->getVar('booking_at') ?? $order->booking_at;
+			$orderData['order_vehicle'] = $this->request->getVar('order_vehicle') ?? $order->order_vehicle;
+
+			if (!empty($this->request->getVar('promo_code'))) {
+				$promo = $this->promoModel->where('promo_code', $this->request->getVar('promo_code'))->statusIs()->first();
+				if (!is($promo, 'object')) return $this->fail('Invalid promo code.');
+				$promoCodeId = $promo->id;
+			}
+
+			$availableVehicles = $this->vehicleRelationModel
+			->getRelationFromCategoryName(true, strtolower($orderData['order_vehicle']) === 'any' ? null : $orderData['order_vehicle'])
+			->findAll();
+			if (!is($availableVehicles, 'array')) return $this->fail(
+				$orderData['order_vehicle'] === 'any' ? 'Any driver/vehicle not available yet.' : 'The selected vehicle is not available yet.'
+			);
+
+			$drop_kms = $this->request->getVar('drop_kms') ?? null;
+			$pickup_kms = $this->request->getVar('pickup_kms') ?? null;
+
+			$categoryIdsArray = [];
+			$categoryIdsArray = array_map(static fn ($vehicles) => $categoryIdsArray[$vehicles->category_id] = $vehicles->category_id, $availableVehicles);
+			
+			$calculatedFare = orderFareCalculation($orderData['order_kms'], $orderData['pickup_lat'], $orderData['pickup_long'], $orderData['drop_lat'], $orderData['drop_long'], implode(',', $categoryIdsArray), $orderData['booking_at'], $promoCodeId, $pickup_kms, $drop_kms);
+			if (!is($calculatedFare, 'object') && is($calculatedFare->total_fare))
+				return $this->fail('Something went wrong, The fare is not calculated yet.');
+
+			$orderData['order_price'] = $calculatedFare->total_fare;
+
+			if (is($calculatedFare->fare_array, 'array')) {
+				$newOrderFare = false;
+				foreach ($calculatedFare->fare_array as $fare) {
+					$newOrderFare = $this->orderFareModel->save(new OrderFare(['fare_id' => $fare->id, 'order_id' => $id]));
+				}
+				if (!$newOrderFare) return $this->fail(
+					'Something went wrong while saving fare order, please try sometime later.',
+				);
+			}
+	
+			if (config('Settings')->enableTaxCommissionCalculation && is($calculatedFare->commission_array, 'array')) {
+				$newOrderCommission = false;
+				foreach ($calculatedFare->commission_array as $commission) {
+					if ($commission->commission_type === 'percentage')
+						$commission_amount = $calculatedFare->calculate_fare * ($commission->commission / 100);
+					else $commission_amount = $commission->commission;
+					$newOrderCommission = $this->orderCommissionModel->save(new OrderCommission([
+						'order_id' => $id, 'commission_id' => $commission->id, 'commission_amount' => $commission_amount
+					]));
+				}
+				if (!$newOrderCommission) return $this->fail(
+					'Something went wrong while saving commission order, please try sometime later.',
+				);
+			}
+	
+			$user_id       = $this->request->getVar('user_id') ?? $this->authenticate->id();
+			if (config('Settings')->enablePromoCode && is($calculatedFare->promo_codes, 'array')) {
+				$newOrderPromo = false;
+				foreach ($calculatedFare->promo_codes as $promo) {
+					$newOrderPromo = $this->orderPromoModel->save(new OrderPromo([
+						'user_id'  => $user_id,
+						'promo_id' => $promo->id,
+						'order_id' => $id,
+						'discount' => $calculatedFare->discount ?? 0,
+					]));
+				}
+				if (!$newOrderPromo) return $this->fail(
+					'Something went wrong while saving promo order, please try sometime later.',
+				);
+			}
 		}
 
 		$updateOrder = $this->model->update($id, new Order($orderData));
