@@ -48,7 +48,7 @@ class CategoryController extends BaseController
 		]);
 
 		$rules = [
-			'name'   => 'required|alpha_space|min_length[3]',
+			'name'   => 'required|min_length[3]',
 			'status' => 'required|in_list[approved, pending, rejected]',
 			'icon'   => 'max_size[icon,2048]|ext_in[icon,png,jpg,jpeg]',
 			'image'  => 'max_size[image,2048]|ext_in[image,png,jpg,jpeg]',
