@@ -420,8 +420,8 @@ class HomeController extends BaseController
 			'notification_type'  => 'order',
 			'is_seen'            => 'unseen',
 			'user_id'            => $user_id,
-			'notification_title' => 'Your ride has been booked',
-			'notification_body'  => 'Your ride order has been placed successfully.',
+			'notification_title' => lang('Lang.yourRideHasBeenBooked'),
+			'notification_body'  => lang('Lang.yourRideOrderHasBeenPlacedSuccessfully'),
 		]);
 
 		return redirect()->to(route_to('dispatch'))->with('success', ['Ride Booked Successfully']);

@@ -156,5 +156,21 @@ return [
     'corporatePayment' => 'Corporate Payment',
 
     'theSelectedVehicleIsNotAvailableYet' => 'The selected vehicle is not available yet.',
-    'anyDriverVehicleNotAvailableYet' => 'Any driver/vehicle not available yet.'
+    'anyDriverVehicleNotAvailableYet' => 'Any driver/vehicle not available yet.',
+    'yourRideHasBeenBooked' => 'Your ride has been booked',
+    'yourRideHasBeenCompleted' => 'Your ride has been completed',
+    'yourRideOrderHasBeenPlacedSuccessfully' => 'Your ride order has been placed successfully.',
+    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted.' => 'You reached your destination and your ride is successfully completed.',
+    'driverIsOnHisWayToPickYou' => 'Driver is on his way to pick you.',
+    'driverWillBeInYourPickupLocationSoon' => 'Driver will be in your pickup location soon.',
+    'driverWillBeInYourPickupLocationSoonOn' => 'Driver will be in your pickup location soon on ',
+    'driverArrived' => 'Driver arrived!',
+    'driverArrivedOnYourPickupLocation' => 'Driver arrived on your pickup location.',
+    'toStartTheRide' => ' to start the ride',
+    'driverHasArrivedTellTheDriverYourCodeToStartTheRide' => 'Driver has arrived, tell the driver your code to start the ride.',
+    'onYourWayToDropOff' => 'On your way to drop off',
+    'yourRideIsStartedAndOnYourWayToDropOff' => 'Your ride is started and on your way to drop off.',
+    'yourRideIsCancelled' => 'Your ride is cancelled',
+    'yourOrderStatusUpdateTo' => 'Your order status update to ',
+    "yourBookingStatusHasBeenUpdatedTo" => 'Your booking ID #{id} status has been updated to {order_status}'
 ];

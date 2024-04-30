@@ -156,6 +156,21 @@ return [
     'corporatePayment' => 'الدفع الشركات',
 
     'theSelectedVehicleIsNotAvailableYet' => 'السيارة المختارة ليست متاحة بعد.',
-    'anyDriverVehicleNotAvailableYet' => 'أي سائق/مركبة غير متوفرة بعد.'
-
+    'anyDriverVehicleNotAvailableYet' => 'أي سائق/مركبة غير متوفرة بعد.',
+    'yourRideHasBeenBooked' => 'لقد تم حجز رحلتك',
+    'yourRideHasBeenCompleted' => 'لقد اكتملت رحلتك',
+    'yourRideOrderHasBeenPlacedSuccessfully' => 'لقد تم تقديم طلب رحلتك بنجاح.',
+    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted.' => 'لقد وصلت إلى وجهتك واكتملت رحلتك بنجاح.',
+    'driverIsOnHisWayToPickYou' => 'السائق في طريقه لاصطحابك.',
+    'driverWillBeInYourPickupLocationSoon' => 'سيكون السائق في موقع الالتقاء الخاص بك قريبًا.',
+    'driverWillBeInYourPickupLocationSoonOn' => 'سيكون السائق في موقع الالتقاء الخاص بك قريبًا في ',
+    'driverArrived' => 'لقد وصل السائق!',
+    'driverArrivedOnYourPickupLocation' => 'وصل السائق إلى موقع الالتقاط الخاص بك.',
+    'toStartTheRide' => 'لبدء الرحلة ',
+    'driverHasArrivedTellTheDriverYourCodeToStartTheRide' => 'لقد وصل السائق، أخبر السائق بالرمز الخاص بك لبدء الرحلة.',
+    'onYourWayToDropOff' => 'في طريقك للنزول',
+    'yourRideIsStartedAndOnYourWayToDropOff' => 'بدأت رحلتك وفي طريقك لنقطة النزول.',
+    'yourRideIsCancelled' => 'تم إلغاء رحلتك',
+    'yourOrderStatusUpdateTo' => 'تم تحديث حالة طلبك إلى ',
+    "yourBookingStatusHasBeenUpdatedTo" => 'تم تحديث حالة معرف الحجز رقم {id} إلى {order_status}'
 ];

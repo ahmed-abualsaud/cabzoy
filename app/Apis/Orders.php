@@ -335,8 +335,8 @@ class Orders extends BaseResourceController
 			'notification_type'  => 'order',
 			'is_seen'            => 'unseen',
 			'user_id'            => $user_id,
-			'notification_title' => 'Your ride has been booked',
-			'notification_body'  => 'Your ride order has been placed successfully.',
+			'notification_title' => lang('Lang.yourRideHasBeenBooked'),
+			'notification_body'  => lang('Lang.yourRideOrderHasBeenPlacedSuccessfully'),
 		]);
 
 		return $this->success($newOrderId, 'created', 'Order Placed Successfully');
@@ -388,45 +388,45 @@ class Orders extends BaseResourceController
 		$order_users = $this->orderUserModel->where('order_id', $id)->findAll();
 		if (is($order_users, 'array')) foreach ($order_users as $orderUser) {
 			if ($orderUser->user_id) {
-				$title = 'Your order status update to ' . $orderData['order_status'];
-				$message = "Your booking ID #$id status has been updated to " . $orderData['order_status'];
+				$title = lang('Lang.yourOrderStatusUpdateTo') . $orderData['order_status'];
+				$message = lang('Lang.yourBookingStatusHasBeenUpdatedTo', ['id' => $id, 'order_status' => $orderData['order_status']]);
 
 				switch ($orderData['order_status']) {
 					case 'dispatched':
 						$vehicle = $this->vehicleRelationModel->where('user_id', $driver->driver_id)->where('status', 'available')->first();
-						$title = 'Driver is on his way to pick you';
-						$message = 'Driver will be in your pickup location soon.';
-						if (isset($vehicle->vehicle->vehicle_color)) $message = "Driver will be in your pickup location soon on " . strtoupper($vehicle->vehicle->vehicle_color . ' ' . $vehicle->vehicle->vehicle_brand . ' ' . $vehicle->vehicle->vehicle_modal . ' ' . $vehicle->vehicle->vehicle_number);
+						$title = lang('Lang.driverIsOnHisWayToPickYou');
+						$message = lang('Lang.driverWillBeInYourPickupLocationSoon');
+						if (isset($vehicle->vehicle->vehicle_color)) $message = lang('Lang.driverWillBeInYourPickupLocationSoonOn') . strtoupper($vehicle->vehicle->vehicle_color . ' ' . $vehicle->vehicle->vehicle_brand . ' ' . $vehicle->vehicle->vehicle_modal . ' ' . $vehicle->vehicle->vehicle_number);
 						break;
 
 					case 'arrived':
-						$title = 'Driver arrived!';
-						$message = 'Driver arrived on your pickup location.';
+						$title = lang('Lang.driverArrived');
+						$message = lang('Lang.driverArrivedOnYourPickupLocation');
 						break;
 
 					case 'picked':
-						$title = $order->order_otp . ' to start the ride';
-						$message = 'Driver has arrived, tell the driver your code to start the ride.';
+						$title = $order->order_otp . lang('Lang.toStartTheRide');
+						$message = lang('Lang.driverHasArrivedTellTheDriverYourCodeToStartTheRide');
 						break;
 
 					case 'ongoing':
-						$title = 'On your way to drop off';
-						$message = 'Your ride is started and on your way to drop off.';
+						$title = lang('Lang.onYourWayToDropOff');
+						$message = lang('Lang.yourRideIsStartedAndOnYourWayToDropOff');
 						break;
 
 					case 'complete':
-						$title = 'Your ride has been completed';
-						$message  = 'You reached your destination and your ride is successfully completed.';
+						$title = lang('Lang.yourRideHasBeenCompleted');
+						$message  = lang('Lang.youReachedYourDestinationAndYourRideIsSuccessfullyCompleted');
 						break;
 
 					case 'cancel':
-						$title = 'Your ride is cancelled';
-						$message = "Your booking ID #$id status has been updated to " . $orderData['order_status'];
+						$title = lang('Lang.yourRideIsCancelled');
+						$message = lang('Lang.yourBookingStatusHasBeenUpdatedTo', ['id' => $id, 'order_status' => $orderData['order_status']]);
 						break;
 
 					default:
-						$title = 'Your order status update to ' . $orderData['order_status'];
-						$message = "Your booking ID #$id status has been updated to " . $orderData['order_status'];
+						$title = lang('Lang.yourOrderStatusUpdateTo') . $orderData['order_status'];
+						$message = lang('Lang.yourBookingStatusHasBeenUpdatedTo', ['id' => $id, 'order_status' => $orderData['order_status']]);
 						break;
 				}
 
