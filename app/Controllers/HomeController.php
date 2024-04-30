@@ -261,7 +261,7 @@ class HomeController extends BaseController
 			->getRelationFromCategoryName(true, strtolower($order_vehicle) === 'any' ? null : $order_vehicle)
 			->findAll();
 		if (!is($availableVehicles, 'array')) return redirect()->back()->withInput()->with('errors', [
-			$order_vehicle === 'any' ? 'Any driver/vehicle not available yet.' : 'The selected vehicle is not available yet.'
+			$order_vehicle === 'any' ? lang('Lang.anyDriverVehicleNotAvailableYet') : lang('Lang.theSelectedVehicleIsNotAvailableYet')
 		]);
 
 		$categoryIdsArray = [];

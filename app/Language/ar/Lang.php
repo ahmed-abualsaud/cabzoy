@@ -154,4 +154,8 @@ return [
     'complete' => 'اكتمال',
     'onGoing' => 'قيد التقدم',
     'corporatePayment' => 'الدفع الشركات',
+
+    'theSelectedVehicleIsNotAvailableYet' => 'السيارة المختارة ليست متاحة بعد.',
+    'anyDriverVehicleNotAvailableYet' => 'أي سائق/مركبة غير متوفرة بعد.'
+
 ];

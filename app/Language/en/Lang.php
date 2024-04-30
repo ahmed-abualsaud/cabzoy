@@ -154,4 +154,7 @@ return [
     'complete' => 'Complete',
     'onGoing' => 'On Going',
     'corporatePayment' => 'Corporate Payment',
+
+    'theSelectedVehicleIsNotAvailableYet' => 'The selected vehicle is not available yet.',
+    'anyDriverVehicleNotAvailableYet' => 'Any driver/vehicle not available yet.'
 ];

@@ -79,7 +79,7 @@ class OrderDrivers extends BaseResourceController
 			if (!is($availableVehicles, 'array')) {
 				$this->orderModel->update($driverOrder->order_id, ['order_status' => 'cancel']);
 				return $this->fail(
-					$order->order_vehicle === 'any' ? 'Any driver/vehicle not available yet.' : 'The selected vehicle is not available yet.'
+					$order->order_vehicle === 'any' ? lang('Lang.anyDriverVehicleNotAvailableYet') : lang('Lang.theSelectedVehicleIsNotAvailableYet')
 				);
 			}
 

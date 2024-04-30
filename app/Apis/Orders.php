@@ -187,7 +187,7 @@ class Orders extends BaseResourceController
 			->getRelationFromCategoryName(true, strtolower($order_vehicle) === 'any' ? null : $order_vehicle)
 			->findAll();
 		if (!is($availableVehicles, 'array')) return $this->fail(
-			$order_vehicle === 'any' ? 'Any driver/vehicle not available yet.' : 'The selected vehicle is not available yet.'
+			$order_vehicle === 'any' ? lang('Lang.anyDriverVehicleNotAvailableYet') : lang('Lang.theSelectedVehicleIsNotAvailableYet')
 		);
 
 		$categoryIdsArray = [];
@@ -572,7 +572,7 @@ class Orders extends BaseResourceController
 			->getRelationFromCategoryName(true, strtolower($orderData['order_vehicle']) === 'any' ? null : $orderData['order_vehicle'])
 			->findAll();
 			if (!is($availableVehicles, 'array')) return $this->fail(
-				$orderData['order_vehicle'] === 'any' ? 'Any driver/vehicle not available yet.' : 'The selected vehicle is not available yet.'
+				$orderData['order_vehicle'] === 'any' ? lang('Lang.anyDriverVehicleNotAvailableYet') : lang('Lang.theSelectedVehicleIsNotAvailableYet')
 			);
 
 			$drop_kms = $this->request->getVar('drop_kms') ?? null;
