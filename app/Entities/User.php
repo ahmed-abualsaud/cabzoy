@@ -13,6 +13,7 @@ class User extends EntitiesUser
 		'id'             => null,
 		'username'       => null,
 		'user_id'        => null,
+		'guest_id'       => null,
 		'name'           => null,
 		'role'           => null,
 		'firstname'      => null,
@@ -103,6 +104,12 @@ class User extends EntitiesUser
 	public function setEmail(?string $email = null)
 	{
 		$this->attributes['email'] = str_safe($email);
+		return $this;
+	}
+
+	public function setGuestID(?int $guest_id = null)
+	{
+		$this->attributes['guest_id'] = $guest_id;
 		return $this;
 	}
 

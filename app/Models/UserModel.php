@@ -14,7 +14,7 @@ class UserModel extends ModelsUserModel
 	protected $returnType      = User::class;
 	protected $validationRules = ['id' => 'permit_empty|is_natural_no_zero'];
 	protected $allowedFields   = [
-		'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash', 'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at', 'firstname', 'lastname', 'phone', 'profile_pic', 'lat', 'long', 'speed', 'heading', 'is_online', 'app_token', 'user_id'
+		'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash', 'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at', 'firstname', 'lastname', 'phone', 'profile_pic', 'lat', 'long', 'speed', 'heading', 'is_online', 'app_token', 'user_id', 'guest_id',
 	];
 
 	public function inGroup($group = null)

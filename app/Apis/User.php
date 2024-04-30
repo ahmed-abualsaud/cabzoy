@@ -15,7 +15,12 @@ class User extends BaseResourceController
 
 	public function login()
 	{
-		if ($this->authenticate->check()) return $this->success($this->authenticate->user(), 'success', 'user already logged in.');
+
+		if ($this->authenticate->check()) {
+			$authUser = $this->authenticate->user();
+			$authUser->guest = empty($authUser->guest_id) ? null : $this->userModel->where('id', $authUser->guest_id)->first();
+			return $this->success($authUser, 'success', 'user already logged in.');
+		};
 
 		$loginAttemptArray = [];
 		$rules = [
@@ -53,7 +58,11 @@ class User extends BaseResourceController
 
 		$auth = $this->authenticate->attempt($loginAttemptArray, true, $this->request->getVar('group'));
 
-		if ($auth) return $this->success($this->authenticate->user(), 'success', 'Logged in successfully');
+		if ($auth) {
+			$authUser = $this->authenticate->user();
+			$authUser->guest = empty($authUser->guest_id) ? null : $this->userModel->where('id', $authUser->guest_id)->first();
+			return $this->success($authUser, 'success', 'Logged in successfully');
+		}
 		return $this->failUnauthorized($this->authenticate->error());
 	}
 
@@ -89,6 +98,28 @@ class User extends BaseResourceController
 		if (is_object($isAlreadyRegistered) && !empty($isAlreadyRegistered))
 			return $this->failResourceExists('User already registered.');
 
+
+		$guestID = null;
+		if ($this->request->getVar('group') == 'drivers') {
+			$guestUser = new EntitiesUser([
+				'force_pass_reset' => 0,
+				'email'            => 'guest_'.$this->request->getVar('email'),
+				'phone'            => 'guest_'.$this->request->getVar('phone'),
+				'lastname'         => 'guest_'.$this->request->getVar('lastname'),
+				'password'         => $this->request->getVar('password'),
+				'username'         => 'guest_'.$this->request->getVar('username'),
+				'firstname'        => 'guest_'.$this->request->getVar('firstname'),
+				'profile_pic'      => $this->request->getVar('profile_pic') ?? null,
+			]);
+
+			$guestUser->activate();
+			if (!$this->userModel->withGroup('users')->save($guestUser)) {
+				return $this->fail($this->userModel->errors());
+			}
+
+			$guestID = $this->userModel->getInsertID();
+		}
+
 		$user = new EntitiesUser([
 			'force_pass_reset' => 0,
 			'email'            => $this->request->getVar('email'),
@@ -98,9 +129,11 @@ class User extends BaseResourceController
 			'username'         => $this->request->getVar('username'),
 			'firstname'        => $this->request->getVar('firstname'),
 			'profile_pic'      => $this->request->getVar('profile_pic') ?? null,
+			'guest_id'         => $guestID,
 		]);
 
 		config('Settings')->enableAutoVerifyUser && $this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
+
 		if (!$this->userModel->withGroup($this->request->getVar('group') ?? 'users')->save($user))
 			return $this->fail($this->userModel->errors());
 
