@@ -83,7 +83,7 @@ class VehicleRelationController extends BaseController
 		if (config('Settings')->enableDefaultVehicleAssign || config('Settings')->enableDefaultVehicleAssignUser) {
 			$userVehicle = $this->userVehicleModel->where('user_id', $driver_id)->first();
 			if (!is($userVehicle, 'object') || !isset($userVehicle->vehicle_id))
-				return redirect()->back()->withInput()->with('errors', ['The default vehicle not assigned yet.']);
+				return redirect()->back()->withInput()->with('errors', [lang('Lang.theDefaultVehicleNotAssignedYet')]);
 			$vehicle_id = $userVehicle->vehicle_id;
 		}
 

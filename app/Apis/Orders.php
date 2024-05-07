@@ -262,15 +262,15 @@ class Orders extends BaseResourceController
 
 		$driverData = $this->userModel->find($nearestDriver->id);
 		if ($driverData && $driverData->app_token) {
-			sendNotification($driverData->app_token, ['title' => 'You have a new ride order', 'body' => 'Don\'t wait the user for the ride, please check it.']);
+			sendNotification($driverData->app_token, ['title' => lang('Lang.youHaveNewRideOrder'), 'body' => lang('Lang.dontWaitTheUserForTheRidePleaseCheckIt')]);
 		}
 
 		setNotification([
 			'notification_type'  => 'order',
 			'is_seen'            => 'unseen',
 			'user_id'            => $nearestDriver->id,
-			'notification_title' => 'You have a new ride order',
-			'notification_body'  => 'Don\'t wait the user for the ride, please check it.'
+			'notification_title' => lang('Lang.youHaveNewRideOrder'),
+			'notification_body'  => lang('Lang.dontWaitTheUserForTheRidePleaseCheckIt')
 		]);
 
 		if (is($calculatedFare->fare_array, 'array')) {

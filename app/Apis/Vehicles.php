@@ -81,7 +81,7 @@ class Vehicles extends BaseResourceController
 		if (config('Settings')->enableDefaultVehicleAssign || config('Settings')->enableDefaultVehicleAssignUser) {
 			$userVehicle = $userVehicleModel->where('user_id', $this->authenticate->id())->first();
 			if (!is($userVehicle, 'object') || !isset($userVehicle->vehicle_id))
-				return $this->fail('The default vehicle not assigned yet.');
+				return $this->fail(lang('Lang.theDefaultVehicleNotAssignedYet'));
 			$vehicle_id = $userVehicle->vehicle_id;
 		}
 

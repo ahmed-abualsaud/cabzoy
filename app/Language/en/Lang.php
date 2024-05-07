@@ -160,7 +160,7 @@ return [
     'yourRideHasBeenBooked' => 'Your ride has been booked',
     'yourRideHasBeenCompleted' => 'Your ride has been completed',
     'yourRideOrderHasBeenPlacedSuccessfully' => 'Your ride order has been placed successfully.',
-    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted.' => 'You reached your destination and your ride is successfully completed.',
+    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted' => 'You reached your destination and your ride is successfully completed.',
     'driverIsOnHisWayToPickYou' => 'Driver is on his way to pick you.',
     'driverWillBeInYourPickupLocationSoon' => 'Driver will be in your pickup location soon.',
     'driverWillBeInYourPickupLocationSoonOn' => 'Driver will be in your pickup location soon on ',
@@ -172,5 +172,9 @@ return [
     'yourRideIsStartedAndOnYourWayToDropOff' => 'Your ride is started and on your way to drop off.',
     'yourRideIsCancelled' => 'Your ride is cancelled',
     'yourOrderStatusUpdateTo' => 'Your order status update to ',
-    "yourBookingStatusHasBeenUpdatedTo" => 'Your booking ID #{id} status has been updated to {order_status}'
+    'yourBookingStatusHasBeenUpdatedTo' => 'Your booking ID #{id} status has been updated to {order_status}',
+    'theDefaultVehicleNotAssignedYet' => 'The default vehicle not assigned yet.',
+    'youHaveNewRideOrder' => 'You have a new ride order',
+    'dispatcherAssignYouNewOrderPleaseCheckIt' => 'Dispatcher assign you a new order, please check it.',
+    'dontWaitTheUserForTheRidePleaseCheckIt' => 'Don\'t wait the user for the ride, please check it',
 ];

@@ -160,7 +160,7 @@ return [
     'yourRideHasBeenBooked' => 'لقد تم حجز رحلتك',
     'yourRideHasBeenCompleted' => 'لقد اكتملت رحلتك',
     'yourRideOrderHasBeenPlacedSuccessfully' => 'لقد تم تقديم طلب رحلتك بنجاح.',
-    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted.' => 'لقد وصلت إلى وجهتك واكتملت رحلتك بنجاح.',
+    'youReachedYourDestinationAndYourRideIsSuccessfullyCompleted' => 'لقد وصلت إلى وجهتك واكتملت رحلتك بنجاح.',
     'driverIsOnHisWayToPickYou' => 'السائق في طريقه لاصطحابك.',
     'driverWillBeInYourPickupLocationSoon' => 'سيكون السائق في موقع الالتقاء الخاص بك قريبًا.',
     'driverWillBeInYourPickupLocationSoonOn' => 'سيكون السائق في موقع الالتقاء الخاص بك قريبًا في ',
@@ -172,5 +172,9 @@ return [
     'yourRideIsStartedAndOnYourWayToDropOff' => 'بدأت رحلتك وفي طريقك لنقطة النزول.',
     'yourRideIsCancelled' => 'تم إلغاء رحلتك',
     'yourOrderStatusUpdateTo' => 'تم تحديث حالة طلبك إلى ',
-    "yourBookingStatusHasBeenUpdatedTo" => 'تم تحديث حالة معرف الحجز رقم {id} إلى {order_status}'
+    'yourBookingStatusHasBeenUpdatedTo' => 'تم تحديث حالة معرف الحجز رقم {id} إلى {order_status}',
+    'theDefaultVehicleNotAssignedYet' => 'لم يتم تعيين السيارة الافتراضية بعد.',
+    'youHaveNewRideOrder' => 'لديك طلب رحلة جديد',
+    'dispatcherAssignYouNewOrderPleaseCheckIt' => 'أرسل لك المرسل طلبًا جديدًا، يرجى التحقق منه.',
+    'dontWaitTheUserForTheRidePleaseCheckIt' => 'لا تنتظر المستخدم للركوب، يرجى التحقق من ذلك.',
 ];

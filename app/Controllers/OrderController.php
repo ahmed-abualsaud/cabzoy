@@ -157,8 +157,8 @@ class OrderController extends BaseController
 			setNotification([
 				'user_id'            => $driver_id,
 				'notification_type'  => 'order',
-				'notification_title' => 'You have a new ride order',
-				'notification_body'  => 'Dispatcher assign you a new order, please check it.'
+				'notification_title' => lang('Lang.youHaveNewRideOrder'),
+				'notification_body'  => lang('Lang.dispatcherAssignYouNewOrderPleaseCheckIt')
 			]);
 		} else {
 			$updateDriver = $this->orderDriverModel->insert(new OrderDriver([
@@ -172,8 +172,8 @@ class OrderController extends BaseController
 			setNotification([
 				'notification_type'  => 'order',
 				'user_id'            => $driver_id,
-				'notification_title' => 'You have a new ride order',
-				'notification_body'  => 'Dispatcher assign you a new order, please check it.'
+				'notification_title' => lang('Lang.youHaveNewRideOrder'),
+				'notification_body'  => lang('Lang.dispatcherAssignYouNewOrderPleaseCheckIt')
 			]);
 		}
 

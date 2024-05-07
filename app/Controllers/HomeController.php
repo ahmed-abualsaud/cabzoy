@@ -343,7 +343,7 @@ class HomeController extends BaseController
 			$driverData = $this->userModel->find($driver_id);
 			if ($driverData && $driverData->app_token) {
 				sendNotification($driverData->app_token, [
-					'title' => 'You have a new ride order', 'body' => 'Don\'t wait the user for the ride, please check it.'
+					'title' => lang('Lang.youHaveNewRideOrder'), 'body' => lang('Lang.dontWaitTheUserForTheRidePleaseCheckIt')
 				]);
 			}
 
@@ -351,8 +351,8 @@ class HomeController extends BaseController
 				'notification_type'  => 'order',
 				'is_seen'            => 'unseen',
 				'user_id'            => $driver_id,
-				'notification_title' => 'You have a new ride order',
-				'notification_body'  => 'Don\'t wait the user for the ride, please check it.'
+				'notification_title' => lang('Lang.youHaveNewRideOrder'),
+				'notification_body'  => lang('Lang.dontWaitTheUserForTheRidePleaseCheckIt')
 			]);
 		}
 
